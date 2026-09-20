@@ -5,6 +5,7 @@ import {
   Link,
   Navigate,
 } from "react-router-dom";
+
 import TeacherResults from "./TeacherResults";
 import CreateQuiz from "./pages/CreateQuiz";
 import JoinQuiz from "./pages/JoinQuiz";
@@ -14,7 +15,6 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import MyResults from "./MyResults";
 import saiquizLogo from "./assets/saiquiz-logo.jpeg";
-
 
 // =========================
 // AUTH HELPERS
@@ -28,30 +28,30 @@ function getUser() {
   }
 }
 
-
 // =========================
 // PROTECTED ROUTE
 // =========================
 
 function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("token");
   const user = getUser();
 
-  if (!user) {
+  if (!token || !user) {
     return <Navigate to="/login" replace />;
   }
 
   return children;
 }
 
-
 // =========================
 // TEACHER ONLY ROUTE
 // =========================
 
 function TeacherRoute({ children }) {
+  const token = localStorage.getItem("token");
   const user = getUser();
 
-  if (!user) {
+  if (!token || !user) {
     return <Navigate to="/login" replace />;
   }
 
@@ -62,15 +62,15 @@ function TeacherRoute({ children }) {
   return children;
 }
 
-
 // =========================
 // STUDENT ONLY ROUTE
 // =========================
 
 function StudentRoute({ children }) {
+  const token = localStorage.getItem("token");
   const user = getUser();
 
-  if (!user) {
+  if (!token || !user) {
     return <Navigate to="/login" replace />;
   }
 
@@ -119,7 +119,6 @@ function Home() {
           />
         </div>
 
-
         <div className="nav-actions">
 
           {/* LOGGED IN */}
@@ -155,7 +154,6 @@ function Home() {
 
       </nav>
 
-
       {/* =========================
           HERO
       ========================= */}
@@ -168,18 +166,15 @@ function Home() {
             ⚡ Smarter way to create quizzes
           </div>
 
-
           <h1>
             Turn your questions into
             <span> quizzes in seconds.</span>
           </h1>
 
-
           <p className="hero-text">
-  Stop entering questions one by one. Paste your entire question
-  set and let SimpleQuiz organize it for you.
-</p>
-
+            Stop entering questions one by one. Paste your entire question
+            set and let SimpleQuiz organize it for you.
+          </p>
 
           <div className="hero-actions">
 
@@ -191,7 +186,6 @@ function Home() {
               <span>→</span>
             </Link>
 
-
             <Link
               to={joinPath}
               className="secondary-button"
@@ -201,13 +195,11 @@ function Home() {
 
           </div>
 
-
           <p className="hero-note">
             Built for teachers. Simple for students.
           </p>
 
         </section>
-
 
         {/* =========================
             BULK IMPORT PREVIEW
@@ -229,7 +221,6 @@ function Home() {
 
             </div>
 
-
             <div className="window-dots">
 
               <span></span>
@@ -239,7 +230,6 @@ function Home() {
             </div>
 
           </div>
-
 
           <div className="preview-content">
 
@@ -258,7 +248,6 @@ function Home() {
                 </span>
 
               </div>
-
 
               <div className="question-text">
 
@@ -292,13 +281,11 @@ function Home() {
 
             </div>
 
-
             {/* ARROW */}
 
             <div className="arrow">
               →
             </div>
-
 
             {/* RIGHT */}
 
@@ -316,7 +303,6 @@ function Home() {
 
               </div>
 
-
               <div className="quiz-item">
 
                 <span>
@@ -329,7 +315,6 @@ function Home() {
 
               </div>
 
-
               <div className="quiz-item">
 
                 <span>
@@ -341,7 +326,6 @@ function Home() {
                 </p>
 
               </div>
-
 
               <div className="quiz-item">
 
@@ -361,7 +345,6 @@ function Home() {
 
         </section>
 
-
         {/* =========================
             FEATURES
         ========================= */}
@@ -379,7 +362,6 @@ function Home() {
             </h2>
 
           </div>
-
 
           <div className="feature-grid">
 
@@ -400,7 +382,6 @@ function Home() {
 
             </div>
 
-
             <div className="feature-card">
 
               <div className="feature-icon">
@@ -417,7 +398,6 @@ function Home() {
               </p>
 
             </div>
-
 
             <div className="feature-card">
 
@@ -440,7 +420,6 @@ function Home() {
         </section>
 
       </main>
-
 
       {/* =========================
           FOOTER
@@ -467,6 +446,7 @@ function Home() {
     </div>
   );
 }
+
 // =========================
 // APP
 // =========================
@@ -479,14 +459,12 @@ function App() {
 
       <Routes>
 
-
         {/* HOME */}
 
         <Route
           path="/"
           element={<Home />}
         />
-
 
         {/* LOGIN */}
 
@@ -495,14 +473,12 @@ function App() {
           element={<Login />}
         />
 
-
         {/* REGISTER */}
 
         <Route
           path="/register"
           element={<Register />}
         />
-
 
         {/* DASHBOARD */}
 
@@ -515,7 +491,6 @@ function App() {
           }
         />
 
-
         {/* CREATE QUIZ - TEACHER ONLY */}
 
         <Route
@@ -526,7 +501,6 @@ function App() {
             </TeacherRoute>
           }
         />
-
 
         {/* JOIN QUIZ - STUDENT ONLY */}
 
@@ -539,18 +513,16 @@ function App() {
           }
         />
 
-
         {/* STUDENT RESULTS - TEACHER ONLY */}
 
-<Route
-  path="/student-results"
-  element={
-    <TeacherRoute>
-      <TeacherResults />
-    </TeacherRoute>
-  }
-/>
-
+        <Route
+          path="/student-results"
+          element={
+            <TeacherRoute>
+              <TeacherResults />
+            </TeacherRoute>
+          }
+        />
 
         {/* MY RESULTS - STUDENT ONLY */}
 
@@ -563,7 +535,6 @@ function App() {
           }
         />
 
-
         {/* UNKNOWN URL */}
 
         <Route
@@ -571,13 +542,11 @@ function App() {
           element={<Navigate to="/" replace />}
         />
 
-
       </Routes>
 
     </BrowserRouter>
 
   );
 }
-
 
 export default App;
