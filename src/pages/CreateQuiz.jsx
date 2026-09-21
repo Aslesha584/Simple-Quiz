@@ -829,10 +829,8 @@ Attend Quiz: https://simple-quiz-black.vercel.app/join`;
                 </strong>
 
                 <p>
-                  Copy the prompt below, paste it
-                  into ChatGPT, and then paste the
-                  formatted questions here.
-                </p>
+  Copy the prompt below, paste it into Meta AI, and then paste the formatted questions here.
+</p>
 
                 <button
                   type="button"
@@ -850,7 +848,7 @@ Attend Quiz: https://simple-quiz-black.vercel.app/join`;
                 >
                   {copied
                     ? "✓ Copied!"
-                    : "Copy ChatGPT Prompt"}
+                    : "Copy Meta AI Prompt"}
                 </button>
               </div>
 
@@ -1056,8 +1054,7 @@ Answer: A`}
                 <strong>Quick tip</strong>
 
                 <p>
-                  Copy an entire question set
-                  from ChatGPT and paste it here.
+                  Copy an entire question set from Meta AI and paste it here.
                 </p>
               </div>
             </div>
